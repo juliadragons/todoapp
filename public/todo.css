@@ -1,0 +1,12 @@
+:root {
+    --dark-blue-color: #003366;
+}
+
+.custom-thead {
+    background-color: var(--dark-blue-color);
+    color: white;
+}
+
+.title-dark-blue {
+    color: var(--dark-blue-color);
+}

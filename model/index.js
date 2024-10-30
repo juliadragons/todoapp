@@ -25,7 +25,7 @@ const pool = mysql.createPool({
         const [results] = await conn.query(
         'SELECT * FROM `todos`'
         );
-        console.log(results);
+        //console.log(results);
         return results;
     
     
@@ -37,8 +37,31 @@ const pool = mysql.createPool({
  
  }
  
+ async function insertTodos(task) {
+    const conn = await pool.getConnection();
+
+    try {
+        const [results] = await conn.query(
+        'insert into todos (description, priority, is_done) values (?,?,?);',
+        [task.description, task.priority, task.isDone]
+        );
+        return results;
+    } catch (err) {
+        console.log(err);
+    }
+    // Don't forget to release the connection when finished!
+    pool.releaseConnection(conn);
+ 
+ }
+
+ async function fetchOneTask(taskId) {
+
+ }
+
  
  module.exports = {
-    getAllTodos
+    getAllTodos,
+    insertTodos,
+    fetchOneTask
  }
  
